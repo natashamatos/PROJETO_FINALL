@@ -20,11 +20,11 @@ app.post("/cliente", async (req, res ) => {
         cliente.senha = senhaCRIPT
         
         const resultado = await db.pool.query(
-            `INSERT INTO CLIENTE (
-                NOME, CPF, EMAIL, CELULAR, SENHA
+            `INSERT INTO Cliente (
+                senha, celular, cpf, email, nome
              ) VALUES (?,   ?,   ?,   ?,  ?)`, 
-             [cliente.nome, cliente.cpf, cliente.email,
-              cliente.celular,cliente.senha]
+             [cliente.senha, cliente.celular, cliente.cpf,
+              cliente.email,cliente.nome]
 
 
         )
@@ -41,7 +41,7 @@ app.post("/cliente", async (req, res ) => {
 app.get("/cliente", async (req, res ) => {
     try {
         const resultado = await db.pool.query(
-            `SELECT ID, NOME, CPF, EMAIL, CELULAR FROM CLIENTE`
+            `SELECT ID, nome, cpf, email, celular FROM Cliente`
         )
         res.status(200).json(resultado[0])
 
@@ -56,7 +56,7 @@ app.get("/cliente/:id", async (req, res ) => {
         const id = req.params.id
 
         const resultado = await db.pool.query(
-            `SELECT ID, NOME, CPF, EMAIL, CELULAR FROM CLIENTE WHERE ID = ?`,
+            `SELECT ID, nome, cpf, email, celular FROM Cliente WHERE ID = ?`,
             [id]
         )
         res.status(200).json(resultado[0])
@@ -75,11 +75,11 @@ app.patch("/cliente/:id", async (req, res ) => {
         cliente.senha = senhaCRIPT
 
         const resultado = await db.pool.query(
-            `UPDATE CLIENTE SET
-                NOME = ?, CPF = ?, EMAIL = ?, CELULAR = ?, SENHA = ?
+            `UPDATE Cliente SET
+                senha = ?, celular = ?, cpf = ?, email = ?, nome = ?
              WHERE ID = ?`,
-             [cliente.nome, cliente.cpf, cliente.email,
-              cliente.celular, cliente.senha, id]
+             [cliente.senha, cliente.celular, cliente.cpf,
+              cliente.email, cliente.nome, id]
         )
         res.status(200).json({
             mensagem : "Cliente atualizado"
@@ -96,7 +96,7 @@ app.delete("/cliente/:id", async (req, res ) => {
         const id = req.params.id
 
         const resultado = await db.pool.query(
-            `DELETE FROM CLIENTE WHERE ID = ?`,
+            `DELETE FROM Cliente WHERE ID = ?`,
             [id]
         )
         res.status(200).json({
