@@ -1,15 +1,16 @@
-//npm i mysq12
-//http://localhost:3000/Cliente post json body
+// npm i mysql2 //
 const mysql = require("mysql2/promise")
 
+
 const pool = mysql.createPool({
-    host:'127.0.0.1',
-    port: 3306,
-    user: 'root',
-    password: 'escola',
-    database: 'Natasha3DSC'
+   host: '127.0.0.1',
+   port: 3306,
+   user: "root",
+   password: 'escola',
+   database: 'Natasha3DSC'
 })
 
-module.exports - Object.freeze({
-    pool:pool
+
+module.exports = Object.freeze({
+   pool: pool
 })
