@@ -1,6 +1,6 @@
 //npm i mysq12
 //http://localhost:3000/Cliente post json body
-const mysql = require("mysq12/promise")
+const mysql = require("mysql2/promise")
 
 const pool = mysql.createPool({
     host:'127.0.0.1',
